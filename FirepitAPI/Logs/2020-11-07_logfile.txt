@@ -1,0 +1,15 @@
+2020-11-07 08:39:42.5009 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-07 08:39:42.5009 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-07 08:39:46.9522 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-07 08:39:46.9522 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-07 08:39:46.9962 INFO User - Login: Generating Token
+2020-11-07 08:39:47.0077 INFO User - Login: Generating Token
+2020-11-07 20:49:30.1208 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-07 20:49:30.1208 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-07 20:49:37.0643 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-07 20:49:37.0643 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-07 20:49:37.3997 INFO User - Login: Generating Token
+2020-11-07 20:49:37.3997 INFO User - Login: Generating Token
+2020-11-07 21:35:03.7948 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-07 21:35:11.2686 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-07 21:35:11.3874 INFO User - Login: Generating Token

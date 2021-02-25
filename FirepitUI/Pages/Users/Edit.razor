@@ -1,0 +1,78 @@
+﻿@page "/users/edit/{Id}"
+
+@inject IPersonRepository _personRepo
+@inject NavigationManager _navMan
+@inject IToastService _toast
+
+<h3 class="card-title">@Model.FirstName @Model.LastName</h3>
+<hr />
+<br />
+@if (!isSuccess)
+{
+    <ErrorMessage Message="Somewthing Went Wrong With the Operation" />
+}
+
+@if(Model == null)
+{
+    <ErrorMessage Message="Loading Profile" />
+}
+else
+{
+<EditForm Model="Model" OnValidSubmit="EditProfile">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <InputText @bind-Value="Model.FirstName" class="form-control" id="firstName" />
+    </div>
+    <div class="form-group">
+        <label for="lasstName">Last Name:</label>
+        <InputText @bind-Value="Model.LastName" class="form-control" id="lastName" />
+    </div>
+    <div class="form-group">
+        <label for="goesBy">Name you go by:</label>
+        <InputText @bind-Value="Model.GoesBy" class="form-control" id="goesBy" />
+    </div>
+    <div class="form-group">
+        <label for="bio">About You</label>
+        <InputText @bind-Value="Model.Bio" class="form-control" id="bio" />
+    </div>
+    <button class="btn btn-primary" type="submit">
+        <span class="oi oi-pencil"></span>
+        Submit Changes
+    </button>
+    <button @onclick="BackToList" class="btn btn-outline-secondary">
+        <span class="oi oi-media-skip-backward"></span>
+        Back To List
+    </button>
+</EditForm>
+}
+
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private Person Model = new Person();
+    private bool isSuccess = true;
+    protected override async Task OnInitializedAsync()
+    {
+        string id = Convert.ToString(Id);
+        Model = await _personRepo.Get(Endpoints.PersonEndpoint, id);
+    }
+
+    private async Task EditProfile()
+    {
+        isSuccess = await _personRepo.Update(Endpoints.PersonEndpoint, Model, Model.Id);
+        if (isSuccess)
+        {
+            _toast.ShowSuccess("Profile updated successfully", "Success!");
+            BackToList();
+        }
+    }
+
+    private void BackToList()
+    {
+        _navMan.NavigateTo("/");
+    }
+}

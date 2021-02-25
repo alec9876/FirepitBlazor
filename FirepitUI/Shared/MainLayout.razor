@@ -1,0 +1,47 @@
+﻿@inherits LayoutComponentBase
+
+@inject ApiAuthenticationStateProvider _authProvider
+
+<div class="page">
+<BlazoredToasts />
+<AuthorizeView>
+    <Authorized>
+        <div class="sidebar">
+            <CascadingValue Value="userId">
+                <NavMenu />
+            </CascadingValue>
+        </div>
+    </Authorized>
+</AuthorizeView>
+
+<div class="main">
+    <AuthorizeView>
+        <Authorized>
+            <div class="top-row">
+                <div class="col-10">
+                    <QuoteMachine />
+                </div>
+                <div class="col">
+                    Howdy @context.User.Identity.Name!
+                </div>
+            </div>
+        </Authorized>
+    </AuthorizeView>
+    <CascadingValue Value="userId">
+        <div class="content px-4">
+            @Body
+        </div>
+    </CascadingValue>
+</div>
+</div>
+
+@code {
+    public string UserId { get; set; }
+    private string userId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await _authProvider.GetAuthenticationStateAsync();
+        userId = state.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    }
+}

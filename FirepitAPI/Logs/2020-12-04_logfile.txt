@@ -1,0 +1,4 @@
+2020-12-04 18:54:31.7493 INFO Meeting - FindPersonGoing: Attempt to get user going.
+2020-12-04 18:56:27.5306 INFO Meeting - FindPersonGoing: Attempt to get user going.
+2020-12-04 18:58:13.5188 INFO Meeting - FindPersonGoing: Attempt to get user going.
+2020-12-04 19:13:44.1879 INFO Meeting - FindPersonGoing: Attempt to get user going.

@@ -1,0 +1,9 @@
+2020-11-03 17:17:12.0589 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-03 17:42:22.4013 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-03 17:43:58.6445 ERROR User - Login: No sign-in authentication handlers are registered. Did you forget to call AddAuthentication().AddCookies("Identity.Application",...)? - 
+2020-11-03 18:10:09.1375 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-03 18:10:32.4003 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-03 18:10:39.7705 INFO User - Login: Generating Token
+2020-11-03 19:36:38.2016 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-03 19:36:48.4709 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-03 19:36:48.5030 INFO User - Login: Generating Token

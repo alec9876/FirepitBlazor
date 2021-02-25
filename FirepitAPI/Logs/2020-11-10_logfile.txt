@@ -1,0 +1,6 @@
+2020-11-10 16:57:26.5110 ERROR Person - UpdatePerson: Update failed for record with id: d2e2a74a-b7b1-4741-bb91-8e2eb16ecbcb
+2020-11-10 17:00:21.0366 ERROR Person - UpdatePerson: Update failed for record with id: d2e2a74a-b7b1-4741-bb91-8e2eb16ecbcb
+2020-11-10 17:49:18.6107 ERROR Person - UpdatePerson: The instance of entity type 'Person' cannot be tracked because another instance with the same key value for {'Id'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values. - 
+2020-11-10 18:39:06.1135 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-10 18:39:10.7415 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-10 18:39:10.7898 INFO User - Login: Generating Token

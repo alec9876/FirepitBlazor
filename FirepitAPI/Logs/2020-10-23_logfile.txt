@@ -1,0 +1,7 @@
+2020-10-23 23:37:52.3828 ERROR Person - GetPeople: Cannot open database "FirepitAPI" requested by the login. The login failed.
+Login failed for user 'DESKTOP-MQBBLKM\Alec Schram'. - 
+2020-10-23 23:39:03.9884 ERROR Person - GetPeople: Invalid column name 'MeedtingId'. - 
+2020-10-23 23:40:58.0846 ERROR Person - GetPeople: Invalid column name 'MeedtingId'. - 
+2020-10-23 23:53:45.2066 ERROR Person - GetPeople: Invalid column name 'MeedtingId'. - 
+2020-10-23 23:55:23.6798 ERROR Person - GetPeople: Data is Null. This method or property cannot be called on Null values. - 
+2020-10-23 23:57:18.8938 ERROR Person - GetPeople: Data is Null. This method or property cannot be called on Null values. - 

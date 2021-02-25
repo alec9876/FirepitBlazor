@@ -1,0 +1,49 @@
+2020-11-08 14:39:44.6017 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-08 14:39:44.6017 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-08 14:39:50.3057 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-08 14:39:50.3057 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-08 14:39:50.3886 INFO User - Login: Generating Token
+2020-11-08 14:39:50.3886 INFO User - Login: Generating Token
+2020-11-08 15:39:53.2663 ERROR Person - UpdatePerson: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> Person
+System.Object -> FirepitAPI.Models.Person - 
+2020-11-08 15:41:34.9308 ERROR Person - UpdatePerson: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> Person
+System.Object -> FirepitAPI.Models.Person - 
+2020-11-08 15:41:54.5936 ERROR Person - UpdatePerson: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> Person
+System.Object -> FirepitAPI.Models.Person - 
+2020-11-08 15:44:09.1784 ERROR Person - UpdatePerson: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> Person
+System.Object -> FirepitAPI.Models.Person - 
+2020-11-08 15:46:30.3415 ERROR Person - UpdatePerson: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> Person
+System.Object -> FirepitAPI.Models.Person - 
+2020-11-08 15:48:25.6606 ERROR Person - UpdatePerson: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> Person
+System.Object -> FirepitAPI.Models.Person - 
+2020-11-08 15:55:36.4066 ERROR Person - UpdatePerson: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Object -> Person
+System.Object -> FirepitAPI.Models.Person - 
+2020-11-08 15:59:48.1867 ERROR Person - UpdatePerson: Database operation expected to affect 1 row(s) but actually affected 0 row(s). Data may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions. - 
+2020-11-08 16:03:33.5294 ERROR Person - UpdatePerson: Database operation expected to affect 1 row(s) but actually affected 0 row(s). Data may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions. - 
+2020-11-08 16:13:56.3431 ERROR Person - UpdatePerson: Database operation expected to affect 1 row(s) but actually affected 0 row(s). Data may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions. - 
+2020-11-08 16:22:34.7513 ERROR Person - UpdatePerson: Database operation expected to affect 1 row(s) but actually affected 0 row(s). Data may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions. - 
+2020-11-08 20:10:59.3122 ERROR Person - UpdatePerson: Database operation expected to affect 1 row(s) but actually affected 0 row(s). Data may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions. - 
+2020-11-08 20:57:56.8447 ERROR Person - UpdatePerson: Database operation expected to affect 1 row(s) but actually affected 0 row(s). Data may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions. - 
+2020-11-08 21:04:31.6110 ERROR Person - UpdatePerson: Database operation expected to affect 1 row(s) but actually affected 0 row(s). Data may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions. - 
+2020-11-08 21:08:45.0449 ERROR Person - UpdatePerson: Database operation expected to affect 1 row(s) but actually affected 0 row(s). Data may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions. - 

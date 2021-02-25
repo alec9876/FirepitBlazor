@@ -1,0 +1,58 @@
+﻿@page "/beverages/"
+@attribute [Authorize]
+
+@inject IBeveragesRepository _bevRepo
+@inject IToastService _toast
+
+<h3>Beverages</h3>
+<hr />
+<br />
+@if (Beverage == null)
+{
+    <LoadingMessage Message="Loading Beverages..." />
+}
+else
+{
+    <a href="/beverages/create/" class="btn btn-success">
+        <span class="oi oi-plus"></span>
+        Add Beverage
+    </a>
+    <a href="/beverages/list/" class="btn btn-secondary">
+        <span class="oi oi-list"></span>
+        See All Beverages
+    </a>
+    <br />
+    <br />
+    <br />
+    @if (Beverage.Count < 1)
+    {
+        <LoadingMessage Message="Oh no!  No one's bringing the goods!  Click 'Create Beverage' to get it happenin'!" />
+    }
+    else
+    {
+        foreach (var item in Beverage)
+        {
+            <button @onclick="@(() => ShowType(item.Type))" class="btn btn-primary">@item.Type</button>
+        }
+
+    }
+}
+
+@code {
+    [CascadingParameter] public IModalService Modal { get; set; }
+
+    IList<Beverages> Beverage { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Beverage = await _bevRepo.FindTypes(Endpoints.AllBevTypesEndpoint);
+    }
+
+    private void ShowType(string type)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(TypeModal.Type), type);
+
+        Modal.Show<TypeModal>(type.ToString(), parameters);
+    }
+}

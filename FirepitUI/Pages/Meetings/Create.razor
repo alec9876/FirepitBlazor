@@ -1,0 +1,60 @@
+﻿@page "/meetings/create/"
+
+@inject IMeetingRepository _meetRepo
+@inject NavigationManager _navMan
+
+@inject IToastService _toast
+
+<h3>Add A New Firepit Meeting</h3>
+<hr />
+<br />
+@if (!Success)
+{
+    <ErrorMessage Message="Something went wrong." />
+}
+
+<EditForm Model="Meeting" OnValidSubmit="HandleCreate">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label for="meetingDate">Firepit Date</label>
+        <InputDate @bind-Value="Meeting.Date" class="form-control" id="meetingDate" />
+    </div>
+    <div class="form-group">
+        <label for="meetingTime">Firepit Time</label>
+        <input id="meetingTime" type="time" @bind-value="Meeting.Time" />
+    </div>
+    <div class="form-group">
+        <label for="meetingPlace">Place</label>
+        <InputText @bind-Value="Meeting.Place" class="form-control" id="meetingPlace" />
+    </div>
+    <button class="btn btn-primary" type="submit">
+        <span class="oi oi-pencil"></span>
+        Add New Firepit
+    </button>
+    <button @onclick="BackToList" class="btn btn-outline-secondary">
+        <span class="oi oi-media-skip-backward"></span>
+        Back To Firepits
+    </button>
+</EditForm>
+
+
+@code {
+    private Meeting Meeting = new Meeting();
+    private bool Success = true;
+
+    private async Task HandleCreate()
+    {
+        Success = await _meetRepo.Create(Endpoints.MeetingEndpoint, Meeting);
+        if (Success)
+        {
+            _toast.ShowSuccess("Firepit Succesfully Created", "");
+            BackToList();
+        }
+    }
+
+    private void BackToList()
+    {
+        _navMan.NavigateTo("/meetings/");
+    }
+}

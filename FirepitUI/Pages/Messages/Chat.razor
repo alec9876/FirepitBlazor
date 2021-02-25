@@ -1,0 +1,158 @@
+﻿@page "/chat/"
+@inject NavigationManager NavigationManager
+@inject IToastService _toast
+@inject IPersonRepository _personRepo
+@using Firepit.Shared
+@inject NavigationManager _navMan
+
+@if (User == null)
+{
+    <ErrorMessage Message="Loading Chat..." />
+}
+else
+{
+    <div>
+        @if (chatting)
+        {
+            <p>You are connected <b>@User.GoesBy</b></p>
+            <button class="btn btn-sm btn-warning ml-md-auto" @onclick="@DisconnectAsync">Disconnect</button>
+        }
+    </div>
+    
+    <div>
+        @if (!chatting)
+        {
+            <input @bind-value="@User.GoesBy" style="display:none;" />
+            <button type="button" @onclick="@Talk"><span class="oi oi-chat" aria-hidden="true"></span>Start Chatting</button>
+
+            @if (message != null)
+            {
+                <div class="invalid-feedback">@message</div>
+                <small id="emailHelp" class="form-text text-white">@message</small>
+            }
+        }
+
+        @if(chatting)
+        {
+            <div id="scrollbox">
+                @foreach(var item in messages)
+                {
+                    <div class="@item.CSS">
+                        <div class="usernameChat">@item.Username</div>
+                        <div>@item.Body</div>
+                    </div>
+                }
+                <hr />
+                <input class="input-lg" placeholder="Enter your comment" @bind="@newMessage" @onkeyup="@Enter" />
+                <button class="btn btn-outline-primary" @onclick="@SendAsync">Send</button>
+            </div>
+        }
+    </div>
+
+}
+@code {
+    [CascadingParameter] string Id { get; set; }
+    public Person User { get; set; }
+    bool chatting = false;
+    string username = null;
+    ChatClient client = null;
+    string message = null;
+    string newMessage = null;
+    List<Message> messages = new List<Message>();
+
+    async Task Talk()
+    {
+        username = User.FullName;
+        if (string.IsNullOrWhiteSpace(username))
+        {
+            message = "Please enter a name";
+            return;
+        };
+        try
+        {
+            string baseUrl = _navMan.ToAbsoluteUri("https://localhost:44358/").ToString();
+            client = new ChatClient(username, baseUrl);
+            client.MessageReceived += MessageReceived;
+
+            await client.StartAsync();
+
+            chatting = true;
+        }
+        catch (Exception e)
+        {
+            message = $"ERROR: Failed to start chat client: {e.Message}";
+        }
+    }
+
+    void MessageReceived(object sender, ChatClient.MessageReceivedEventArgs e)
+    {
+        bool isMine = false;
+        if (!string.IsNullOrWhiteSpace(e.Username))
+        {
+            isMine = string.Equals(e.Username, username, StringComparison.CurrentCultureIgnoreCase);
+        }
+
+        var newMsg = new Message(e.Username, e.Message, isMine);
+        messages.Add(newMsg);
+
+        StateHasChanged();
+    }
+
+    async Task DisconnectAsync()
+    {
+        if (chatting)
+        {
+            await client.StopAsync();
+            client = null;
+            message = "Chat ended";
+            chatting = false;
+        }
+    }
+
+    async Task SendAsync()
+    {
+        if (chatting && !string.IsNullOrWhiteSpace(newMessage))
+        {
+            // send message to hub
+            await client.SendAsync(newMessage);
+            // clear input box
+            newMessage = "";
+        }
+    }
+
+
+    class Message
+    {
+        public Message(string username, string body, bool mine)
+        {
+            Username = username;
+            Body = body;
+            Mine = mine;
+        }
+
+        public string Username { get; set; }
+        public string Body { get; set; }
+        public bool Mine { get; set; }
+
+        public string CSS
+        {
+            get
+            {
+                return Mine ? "sent" : "received";
+            }
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        User = await _personRepo.Get(Endpoints.PersonEndpoint, Id);
+    }
+
+    private async Task Enter(KeyboardEventArgs e)
+    {
+        if(e.Key == "Enter")
+        {
+            await SendAsync();
+        }
+    }
+}

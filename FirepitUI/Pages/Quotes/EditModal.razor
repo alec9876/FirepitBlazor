@@ -1,0 +1,74 @@
+﻿@inject IQuoteRepository _repo
+@inject IPersonRepository _personRepo
+@inject IToastService _toast
+@inject NavigationManager _navMan
+
+@if (Quotes != null)
+{
+<EditForm Model="Quotes" OnValidSubmit="HandleUpdate">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label for="personQuote">Who Said It</label>
+        <select @bind="Quotes.WhoSaidIt" class="form-control" id="personQuote">
+            <option value="">-- Select Who Said It --</option>
+            @if (Quotes != null)
+            {
+                @foreach (var item in Person)
+                {
+                    <option value="@item.Id">@item.FullName</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="quote">The Quote - @(maxCount - text.Count())</label>
+        <textarea @bind="text" @bind:event="oninput" maxlength="@maxCount" class="form-control" id="quote"></textarea>
+    </div>
+    <button class="btn btn-primary" type="submit">
+        <span class="oi oi-plus"></span>
+        Update Quote
+    </button>
+    <button @onclick="BlazoredModal.Cancel" class="btn btn-dark">Close</button>
+</EditForm>
+}
+
+
+@code {
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+    [Parameter] public int QuoteId { get; set; }
+
+    private Quotes Quotes { get; set; }
+    private IList<Person> Person;
+    private bool isSuccess = true;
+    const int maxCount = 100;
+    string text;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Quotes = await _repo.Get(Endpoints.QuoteEndpoint, QuoteId);
+        Person = await _personRepo.Get(Endpoints.PersonEndpoint);
+        text = Quotes.Quote;
+    }
+
+    private async Task HandleUpdate()
+    {
+        Quotes.Quote = text;
+        isSuccess = await _repo.Update(Endpoints.QuoteEndpoint, Quotes, Quotes.Id);
+        if (isSuccess)
+        {
+            _toast.ShowSuccess("Quote Updated Successfully", "");
+            BackToList();
+        }
+        else
+        {
+            _toast.ShowError("Quote Update Failed", "");
+            BackToList();
+        }
+    }
+
+    private void BackToList()
+    {
+        _navMan.NavigateTo("/quotes/", true);
+    }
+}

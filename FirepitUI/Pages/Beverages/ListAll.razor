@@ -1,0 +1,145 @@
+﻿@page "/beverages/list"
+
+@inject IBeveragesRepository _bevRepo
+@inject NavigationManager _navMan
+
+<h3>All Beverages</h3>
+<hr />
+<br />
+@if(Beverages == null)
+{
+    <LoadingMessage Message="Loading Beverages" />
+}
+else
+{
+    <a href="/beverages/create/" class="btn btn-success">
+        <span class="oi oi-plus"></span>
+        Add Beverage
+    </a>
+    <br />
+    <br />
+    <br />
+    @if(Beverages.Count < 1)
+    {
+        <LoadingMessage Message="No beverages, bruh.  Click 'Add Beverage' to get started." />
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-dark table-striped">
+                <thead style="background-color:black;">
+                    <tr>
+                        <th @onclick="@(async () => await SortBeverages("Date"))">For Meeting Day</th>
+                        <th @onclick="@(async () => await SortBeverages("Name"))">Beverage Name</th>
+                        <th @onclick="@(async () => await SortBeverages("Type"))">Beverage Type</th>
+                        <th @onclick="@(async () => await SortBeverages("Amount"))">Beverage Amount</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Beverages)
+                    {
+                    <tr>
+                        <td>@item.Meeting.Date.ToShortDateString()</td>
+                        <td>@item.Name</td>
+                        <td>@item.Type</td>
+                        <td>@item.Amount</td>
+                        @if (Id == item.PersonId)
+                        {
+                        <td>
+                            <button @onclick="@(() => EditBeverage(item.Id))" class="btn btn-warning">
+                                <span class="oi oi-pencil"></span>
+                            </button>
+                        </td>
+                        <td>
+                            <button @onclick="@(() => DeleteBeverage(item.Id))" class="btn btn-danger">
+                                <span class="oi oi-delete"></span>
+                            </button>
+                        </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                            <td></td>
+                        }
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+}
+
+
+@code {
+    [CascadingParameter] public IModalService Modal { get; set; }
+    [CascadingParameter] string Id { get; set; }
+    private IList<Beverages> Beverages;
+    private int ids = 0;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Beverages = await _bevRepo.Get(Endpoints.BeverageEndpoint);
+    }
+
+    private void EditBeverage(int id)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(EditModal.Id), id);
+
+        Modal.Show<EditModal>("Edit Beverage", parameters);
+    }
+
+    private void DeleteBeverage(int id)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(DeleteModal.BeverageId), id);
+
+        Modal.Show<DeleteModal>("DELETE", parameters);
+    }
+
+    protected async Task SortBeverages(string sortOrder)
+    {
+        Beverages = await _bevRepo.Get(Endpoints.BeverageEndpoint);
+
+        if (ids == 0)
+        {
+            ids = 1;
+            switch (sortOrder)
+            {
+                case "Type":
+                    Beverages = Beverages.OrderByDescending(x => x.Type).ToArray();
+                    break;
+                case "Name":
+                    Beverages = Beverages.OrderByDescending(x => x.Name).ToArray();
+                    break;
+                case "Amount":
+                    Beverages = Beverages.OrderByDescending(x => x.Amount).ToArray();
+                    break;
+                case "Date":
+                    Beverages = Beverages.OrderByDescending(x => x.Meeting.Date).ToArray();
+                    break;
+            }
+        }
+        else
+        {
+            ids = 0;
+            switch (sortOrder)
+            {
+                case "Type":
+                    Beverages = Beverages.OrderBy(x => x.Type).ToArray();
+                    break;
+                case "Name":
+                    Beverages = Beverages.OrderBy(x => x.Name).ToArray();
+                    break;
+                case "Amount":
+                    Beverages = Beverages.OrderBy(x => x.Amount).ToArray();
+                    break;
+                case "Date":
+                    Beverages = Beverages.OrderBy(x => x.Meeting.Date).ToArray();
+                    break;
+            }
+        }
+    }
+}

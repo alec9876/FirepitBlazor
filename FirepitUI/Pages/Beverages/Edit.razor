@@ -1,0 +1,113 @@
+﻿@page "/beverages/edit/{Id}"
+
+@inject IBeveragesRepository _bevRepo
+@inject IMeetingRepository _meetRepo
+@inject IToastService _toast
+@inject NavigationManager _navMan
+
+<h3>Edit Beverages</h3>
+<hr />
+<br />
+@if (int.Parse(Id) < 1 || string.IsNullOrWhiteSpace(Id))
+{
+    <ErrorMessage Message="Invalid Selection. Please Try Again" />
+}
+else if (Beverage == null)
+{
+    <LoadingMessage Message="Loading Beverages" />
+}
+else
+{
+    <EditForm Model="Beverage" OnValidSubmit="HandleUpdate">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="row">
+            <div class="form-group col-3">
+                <label for="beverageName">Beverage Name</label>
+                <InputText @bind-Value="Beverage.Name" class="form-control" id="beverageName" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-3">
+                <label for="beverageType">Beverage Type</label>
+                <InputSelect @bind-Value="Beverage.Type" class="form-control">
+                    @foreach (var type in Enum.GetValues(typeof(BeverageTypes)))
+                        {
+                        <option value="@type">@type</option>
+                        }
+                </InputSelect>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-3">
+                <label for="beverageAmount">Beverage Amount</label>
+                <InputText @bind-Value="Beverage.Amount" class="form-control" id="beverageAmount" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-3">
+                <label for="beverageMeetingDate">For Meeting Date</label>
+                <InputSelect @bind-Value="Beverage.MeetingId" class="form-control">
+                    @foreach(var meet in Meeting)
+                    {
+                        <option value="@meet.Id">@meet.Date.ToShortDateString()</option>
+                    }
+                </InputSelect>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">
+            <span class="oi oi-pencil"></span>
+            Submit Changes
+        </button>
+        <button @onclick="BackToList" class="btn btn-outline-secondary">
+            <span class="oi oi-media-skip-backward"></span>
+            Back To Beverages
+        </button>
+    </EditForm>
+
+    <button @onclick="@(() => DeleteBeverage(Beverage.Id))" class="btn btn-danger">
+        <span class="oi oi-delete"></span>
+        Delete Beverage
+    </button>
+}
+
+@code {
+    [CascadingParameter] public IModalService Modal { get; set; }
+    [Parameter] public string Id { get; set; }
+
+
+    private Beverages Beverage { get; set; }
+    private IList<Meeting> Meeting;
+    private bool isSuccess = true;
+
+    protected async override Task OnInitializedAsync()
+    {
+        var id = Int32.Parse(Id);
+        Beverage = await _bevRepo.Get(Endpoints.BeverageEndpoint, id);
+        Meeting = await _meetRepo.Get(Endpoints.MeetingEndpoint);
+    }
+
+    private async Task HandleUpdate()
+    {
+        isSuccess = await _bevRepo.Update(Endpoints.BeverageEndpoint, Beverage, Beverage.Id);
+        if (isSuccess)
+        {
+            _toast.ShowSuccess("Beverage Updated Successfully", "");
+            BackToList();
+        }
+    }
+
+    private void DeleteBeverage(int id)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(DeleteModal.BeverageId), id);
+
+        Modal.Show<DeleteModal>("DELETE", parameters);
+
+    }
+
+    private void BackToList()
+    {
+        _navMan.NavigateTo("/beverages/");
+    }
+}

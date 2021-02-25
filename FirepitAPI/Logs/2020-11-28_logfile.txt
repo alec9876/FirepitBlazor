@@ -1,0 +1,36 @@
+2020-11-28 07:43:05.0076 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-28 07:43:06.8433 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-28 07:43:06.8729 INFO User - Login: Generating Token
+2020-11-28 14:30:25.9350 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-28 14:30:27.3290 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-28 14:30:27.3489 INFO User - Login: Generating Token
+2020-11-28 16:26:36.7099 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-28 16:26:38.2911 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-28 16:26:38.3086 INFO User - Login: Generating Token
+2020-11-28 16:43:54.4147 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-28 16:43:55.7682 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-28 16:43:55.7846 INFO User - Login: Generating Token
+2020-11-28 16:45:08.4924 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-28 16:45:09.7539 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-28 16:45:09.7692 INFO User - Login: Generating Token
+2020-11-28 16:45:35.2944 INFO User - Login: Login Attempt from user` david@email.com 
+2020-11-28 16:45:35.3425 INFO User - Login: david@email.com Successfully Authenticated
+2020-11-28 16:45:35.3425 INFO User - Login: Generating Token
+2020-11-28 17:25:51.2931 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-28 17:25:54.5279 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-28 17:25:54.5529 INFO User - Login: Generating Token
+2020-11-28 17:34:44.9290 INFO User - Login: Login Attempt from user` david@email.com 
+2020-11-28 17:34:45.4653 INFO User - Login: david@email.com Successfully Authenticated
+2020-11-28 17:34:45.5161 INFO User - Login: Generating Token
+2020-11-28 17:35:30.7810 INFO User - Login: Login Attempt from user` david@email.com 
+2020-11-28 17:35:30.8413 INFO User - Login: david@email.com Successfully Authenticated
+2020-11-28 17:35:30.8510 INFO User - Login: Generating Token
+2020-11-28 17:37:49.6960 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-28 17:37:50.0609 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-28 17:37:50.0811 INFO User - Login: Generating Token
+2020-11-28 17:43:41.1316 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-28 17:43:44.3278 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-28 17:43:44.3664 INFO User - Login: Generating Token
+2020-11-28 18:31:42.3474 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-28 18:31:45.2878 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-28 18:31:45.3369 INFO User - Login: Generating Token

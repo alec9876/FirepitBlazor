@@ -1,0 +1,93 @@
+﻿@page "/meetings/"
+
+@inject IMeetingRepository _meetRepo
+@inject IToastService _toast
+@inject NavigationManager _navMan
+
+<h3>Firepits</h3>
+<hr />
+<br />
+@if (Meeting == null)
+{
+    <LoadingMessage Message="Loading Firepits..." />
+}
+else
+{
+    <a href="/meetings/create" class="btn btn-primary">
+        <span class="oi oi-plus"></span>
+        Create New Firepit
+    </a>
+    <br />
+    <br />
+    <br />
+    @if (Meeting.Count < 1)
+    {
+        <LoadingMessage Message="No Firepit Meetings!  Click 'Create Firepit' to get one going." />
+    }
+    else
+    {
+        <h4>Upcoming Firepits</h4>
+            @foreach (var item in Meeting.OrderBy(x => x.Date))
+            {
+                <div class="row" style="margin-bottom:1rem;">
+                    <div class="col bg-dark">
+                    <button @onclick="@(() => ShowMeeting(item.Id, Id))"
+                            class="btn btn-block btn-dark">
+                        @item.Date.ToShortDateString() @item.Time.ToShortTimeString()
+                    </button>
+                    </div>
+                    @if (item.UserMeetings == null)
+                    {
+                        <div class="col">
+                        <label>Ain't nobody here.</label>
+                        </div>
+                    }
+                    else
+                    {
+                        foreach (var userMeet in item.UserMeetings)
+                        {
+                            if (userMeet.PersonId == Id && userMeet.Going == true)
+                            {
+                                <div class="col bg-success text-white">
+                                    <label>You're Going! &#10004;</label>
+                                </div>
+                            }
+                            if (userMeet.PersonId == Id && userMeet.Going == false)
+                            {
+                                <div class="col bg-danger text-white">
+                                    <label>You're not going, you Jerk. &#10006;</label>
+                                </div>
+                            }
+                            if ((userMeet.PersonId == Id || userMeet.PersonId == null) && userMeet.Going == null)
+                            {
+                                <div class="col bg-warning text-dark">
+                                    <label>Are you going or not?!</label>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+             }
+    }
+}
+
+
+@code {
+    [CascadingParameter] public IModalService Modal { get; set; }
+    [CascadingParameter] string Id { get; set; }
+    private IList<Meeting> Meeting { get; set; }
+
+        protected async override Task OnInitializedAsync()
+        {
+            Meeting = await _meetRepo.Get(Endpoints.MeetingEndpoint);
+        }
+
+        private void ShowMeeting(int MeetingId, string PersonId)
+        {
+            var parameters = new ModalParameters();
+            parameters.Add(nameof(MeetingListModal.MeetingId), MeetingId);
+            parameters.Add(nameof(MeetingListModal.PersonId), PersonId);
+
+            Modal.Show<MeetingListModal>("Firepit Meeting", parameters);
+        }
+}

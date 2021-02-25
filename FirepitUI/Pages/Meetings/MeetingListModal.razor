@@ -1,0 +1,114 @@
+﻿@inject IMeetingRepository _meetRepo
+@inject IPersonRepository _personRepo 
+@inject IToastService _toast
+@inject NavigationManager _navMan
+
+<div class="table-responsive">
+    <table class="table table-dark table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Firepit Day</th>
+                <th>Firepit Time</th>
+                <th>Firepit Place</th>
+                <th>Who's Going</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Meeting.Date.ToShortDateString()</td>
+                <td>@Meeting.Time.ToShortTimeString()</td>
+                <td>@Meeting.Place</td>
+                <td>
+                    <ul style="list-style-type:none; text-align:center; padding:0px;">
+                        @if (Meeting.UserMeetings != null)
+                        {
+                            if (Meeting.UserMeetings.Count(x => x.Going == null) == Person.Count())
+                            {
+                                <li>Nobody's Going.  Sad!</li>
+                            }
+                            else
+                            {
+                                foreach (var item in Meeting.UserMeetings)
+                                {
+                                    foreach (var person in Person)
+                                    {
+                                        if (item.Going == true && item.PersonId == person.Id)
+                                        {
+                                        <li>@person.FullName</li>
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button @onclick="BlazoredModal.Cancel" class="btn btn-dark">Close</button>
+    @if (Meeting.UserMeetings != null)
+    {
+        @foreach (var userMeet in Meeting.UserMeetings)
+        {
+            if (userMeet.PersonId == PersonId && (userMeet.Going == null || userMeet.Going == false))
+            {
+                <button @onclick="Going" class="btn btn-success">Click Here To Go To Firepit!</button>
+            }
+            if (userMeet.PersonId == PersonId && userMeet.Going == true)
+            {
+                <button @onclick="NotGoing" class="btn btn-danger">Click Here To Not Go</button>
+            }
+        }
+    }
+</div>
+
+@code {
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+    [Parameter] public string PersonId { get; set; }
+    [Parameter] public int MeetingId { get; set; }
+    IList<Person> Person  = new List<Person>();
+    Meeting Meeting = new Meeting();
+    UserMeeting UserMeeting = new UserMeeting();
+    private bool isSuccess = true;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Meeting = await _meetRepo.Get(Endpoints.MeetingEndpoint, MeetingId);
+        Person = await _personRepo.Get(Endpoints.PersonEndpoint);
+    }
+
+    private async Task Going()
+    {
+        UserMeeting.Going = true;
+        UserMeeting.MeetingId = MeetingId;
+        UserMeeting.PersonId = PersonId;
+
+        isSuccess = await _meetRepo.UpdateUserMeeting(Endpoints.UpdateUserMeetingEndpoint, UserMeeting, MeetingId);
+        if(isSuccess)
+        {
+            _toast.ShowSuccess("You are going!", "");
+            BackToList();
+
+        }
+    }
+
+    private async Task NotGoing()
+    {
+        UserMeeting.Going = false;
+        UserMeeting.MeetingId = MeetingId;
+        UserMeeting.PersonId = PersonId;
+
+        isSuccess = await _meetRepo.UpdateUserMeeting(Endpoints.UpdateUserMeetingEndpoint, UserMeeting, MeetingId);
+        if (isSuccess)
+        {
+            _toast.ShowSuccess("You are not going.", "");
+            BackToList();
+
+        }
+    }
+
+    private void BackToList()
+    {
+        _navMan.NavigateTo("/meetings/", true);
+    }
+}

@@ -1,0 +1,26 @@
+2020-12-28 09:18:58.1022 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-12-28 09:18:58.6663 INFO User - Login: alecschram@hotmail.com Not Authenticated
+2020-12-28 09:19:06.0939 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-12-28 09:19:06.3167 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-12-28 09:19:06.3310 INFO User - Login: Generating Token
+2020-12-28 09:19:36.2710 INFO User - Login: Login Attempt from user` david@email.com 
+2020-12-28 09:19:36.2957 INFO User - Login: david@email.com Successfully Authenticated
+2020-12-28 09:19:36.2957 INFO User - Login: Generating Token
+2020-12-28 09:27:12.3825 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-12-28 09:27:12.6166 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-12-28 09:27:12.6372 INFO User - Login: Generating Token
+2020-12-28 09:42:17.4479 INFO User - Login: Login Attempt from user` david@email.com 
+2020-12-28 09:42:17.6055 INFO User - Login: david@email.com Successfully Authenticated
+2020-12-28 09:42:17.6176 INFO User - Login: Generating Token
+2020-12-28 09:47:13.8215 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-12-28 09:47:14.0664 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-12-28 09:47:14.0824 INFO User - Login: Generating Token
+2020-12-28 18:51:22.5556 INFO User - Login: Login Attempt from user` david@email.com 
+2020-12-28 18:51:22.7042 INFO User - Login: david@email.com Successfully Authenticated
+2020-12-28 18:51:22.7158 INFO User - Login: Generating Token
+2020-12-28 19:34:00.7898 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-12-28 19:34:01.0938 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-12-28 19:34:01.1110 INFO User - Login: Generating Token
+2020-12-28 19:57:04.4146 INFO User - Login: Login Attempt from user` david@email.com 
+2020-12-28 19:57:04.6047 INFO User - Login: david@email.com Successfully Authenticated
+2020-12-28 19:57:04.6047 INFO User - Login: Generating Token

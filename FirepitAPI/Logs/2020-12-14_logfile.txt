@@ -1,0 +1,3 @@
+2020-12-14 17:32:10.9864 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-12-14 17:32:11.6312 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-12-14 17:32:11.6520 INFO User - Login: Generating Token

@@ -1,0 +1,88 @@
+﻿@page "/beverages/create/"
+
+@inject IBeveragesRepository _bevRepo
+@inject IMeetingRepository _meetRepo
+@inject NavigationManager _navMan
+
+@inject IToastService _toast
+
+<h3>Add a New Beverage</h3>
+<hr />
+<br />
+@if (!Success)
+{
+    <ErrorMessage Message="Something went wrong." />
+}
+
+
+<EditForm Model="Beverage" OnValidSubmit="HandleCreate">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div style="display:none;">
+        <InputText @bind-Value="Beverage.PersonId" />
+    </div>
+    <div class="form-group">
+        <label for="beverageName">Beverage Name</label>
+        <InputText @bind-Value="Beverage.Name" class="form-control" id="beverageName" />
+    </div>
+    <div class="form-group">
+        <label for="beverageType">Beverage Type</label>
+        <InputSelect @bind-Value="Beverage.Type">
+            @foreach (var type in Enum.GetValues(typeof(BeverageTypes)))
+            {
+                <option value="@type">@type</option>
+            }
+        </InputSelect>
+    </div>
+    <div class="form-group">
+        <label for="beverageAmount">Beverage Amount</label>
+        <InputText @bind-Value="Beverage.Amount" class="form-control" id="beverageAmount" />
+    </div>
+    <div class="form-group">
+        <label for="beverageMeetingDate">For Meeting Date</label>
+        <select @bind="Beverage.MeetingId" class="form-control" id="beverageMeetingDate">
+            <option value="">-- Select Meeting Date --</option>
+            @if (Meeting != null)
+            {
+                @foreach (var meet in Meeting)
+                {
+                    <option value="@meet.Id">@meet.Date.ToShortDateString()</option>
+                }
+            }
+        </select>
+    </div>
+    <button class="btn btn-primary" type="submit">
+        <span class="oi oi-pencil"></span>
+        Add New Beverage
+    </button>
+    <button @onclick="BackToList" class="btn btn-outline-secondary">
+        <span class="oi oi-media-skip-backward"></span>
+        Back To Beverages
+    </button>
+</EditForm>
+
+@code {
+    private Beverages Beverage = new Beverages();
+    private IList<Meeting> Meeting;
+    private bool Success = true;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Meeting = await _meetRepo.Get(Endpoints.MeetingEndpoint);
+    }
+
+    private async Task HandleCreate()
+    {
+        Success = await _bevRepo.Create(Endpoints.BeverageEndpoint, Beverage);
+        if (Success)
+        {
+            _toast.ShowSuccess("Beverage Succesfully Created", "");
+            BackToList();
+        }
+    }
+
+    private void BackToList()
+    {
+        _navMan.NavigateTo("/beverages/");
+    }
+}

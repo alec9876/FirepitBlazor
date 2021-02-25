@@ -1,0 +1,34 @@
+﻿@page "/"
+@inject NavigationManager _navMan
+
+<h1>Welcome to The Firepit!</h1>
+
+
+
+<AuthorizeView>
+    <NotAuthorized>
+        <div class="text-center">
+            <h2>Sign in or sign up, fella.</h2>
+            <div>
+                <button @onclick="GoToLogin" class="btn btn-dark">
+                    Login
+                </button>
+                <button @onclick="GoToRegister" class="btn btn-dark">
+                    Register
+                </button>
+            </div>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    private void GoToLogin()
+    {
+        _navMan.NavigateTo("/login");
+    }
+
+    private void GoToRegister()
+    {
+        _navMan.NavigateTo("/register");
+    }
+}

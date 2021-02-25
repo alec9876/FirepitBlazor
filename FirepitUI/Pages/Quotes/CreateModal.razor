@@ -1,0 +1,75 @@
+﻿@inject IQuoteRepository _repo
+@inject IPersonRepository _personRepo
+@inject IToastService _toast
+@inject NavigationManager _navMan
+
+@if(!success)
+{
+    <ErrorMessage Message="Something went wrong" />
+}
+
+<EditForm Model="Quote" OnValidSubmit="HandleCreate">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div style="display:none;">
+        <InputText @bind-Value="Quote.PersonId" />
+    </div>
+    <div class="form-group">
+        <label for="personQuote">Who Said It</label>
+        <select @bind="Quote.WhoSaidIt" class="form-control" id="personQuote">
+            <option value="">-- Select Who Said It --</option>
+            @if (Person != null)
+            {
+                @foreach (var item in Person)
+                {
+                    <option value="@item.Id">@item.FullName</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="quote">The Quote - @(maxCount - text.Count())</label>
+        <textarea @bind="text" @bind:event="oninput" maxlength="@maxCount" class="form-control" id="quote"></textarea>
+    </div>
+    <button class="btn btn-primary" type="submit">
+        <span class="oi oi-plus"></span>
+        Add Quote
+    </button>
+    <button @onclick="BlazoredModal.Cancel" class="btn btn-dark">Close</button>
+</EditForm>
+
+@code {
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+    [Parameter] public int PersonId { get; set; }
+    private Quotes Quote = new Quotes();
+    private IList<Person> Person;
+    private bool success = true;
+    string text = "";
+    const int maxCount = 100;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Person = await _personRepo.Get(Endpoints.PersonEndpoint);
+    }
+
+    private async Task HandleCreate()
+    {
+        Quote.Quote = text;
+        success = await _repo.Create(Endpoints.QuoteEndpoint, Quote);
+        if(success)
+        {
+            _toast.ShowSuccess("Quote Created Successfully", "");
+            BackToList();
+        }
+        else
+        {
+            _toast.ShowError("Quote Creation Failed", "");
+            BackToList();
+        }
+    }
+
+    private void BackToList()
+    {
+        _navMan.NavigateTo("/quotes/", true);
+    }
+}

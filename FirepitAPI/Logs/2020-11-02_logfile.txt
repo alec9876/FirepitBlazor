@@ -1,0 +1,24 @@
+2020-11-02 17:25:27.8196 ERROR User - Register: PasswordRequiresNonAlphanumeric Passwords must have at least one non alphanumeric character.
+2020-11-02 17:25:31.4903 ERROR User - Register: PasswordRequiresUpper Passwords must have at least one uppercase ('A'-'Z').
+2020-11-02 17:25:32.8500 ERROR User - Register: user@example.com User Registration Attempt Failed
+2020-11-02 19:33:54.2288 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-02 19:33:58.5573 ERROR User - Login: No sign-in authentication handlers are registered. Did you forget to call AddAuthentication().AddCookies("Identity.Application",...)? - 
+2020-11-02 19:34:23.6120 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-02 19:35:07.1935 ERROR User - Login: No sign-in authentication handlers are registered. Did you forget to call AddAuthentication().AddCookies("Identity.Application",...)? - 
+2020-11-02 19:44:39.3088 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-02 19:47:32.2935 ERROR User - Login: No sign-in authentication handlers are registered. Did you forget to call AddAuthentication().AddCookies("Identity.Application",...)? - 
+2020-11-02 19:54:07.8517 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-02 19:54:28.8181 ERROR User - Login: No sign-in authentication handlers are registered. Did you forget to call AddAuthentication().AddCookies("Identity.Application",...)? - 
+2020-11-02 20:28:05.9228 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-02 20:28:36.6344 ERROR User - Login: No sign-in authentication handlers are registered. Did you forget to call AddAuthentication().AddCookies("Identity.Application",...)? - 
+2020-11-02 20:59:46.6196 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-02 22:08:21.2579 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-02 22:14:32.6968 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-02 22:29:46.3377 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-02 22:47:02.8225 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-02 22:58:51.2747 ERROR User - Login: No sign-in authentication handler is registered for the scheme 'Identity.Application'. The registered sign-in schemes are: Cookies. Did you forget to call AddAuthentication().AddCookies("Identity.Application",...)? - 
+2020-11-02 22:59:03.3663 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-02 22:59:20.1430 INFO User - Login: alecschram@hotmail.com Not Authenticated
+2020-11-02 22:59:47.4877 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-02 23:01:06.0887 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-02 23:02:19.8217 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 

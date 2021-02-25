@@ -1,0 +1,41 @@
+﻿@inject IBeveragesRepository _bevRepo
+
+<div class="table-responsive">
+    <table class="table table-dark table-striped">
+        <thead style="background-color:black;">
+            <tr>
+                <th>Beverage Name</th>
+                <th>Beverage Amount</th>
+                <th>For Meeting Day</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Beverage)
+            {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Amount</td>
+                <td>@item.Meeting.Date.ToShortDateString()</td>
+                <td>
+                    <a href="/Beverages/Edit/@item.Id" class="btn btn-warning">
+                        <span class="oi oi-pencil"></span>
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <button @onclick="BlazoredModal.Cancel" class="btn btn-dark">Close</button>
+</div>
+
+@code {
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+    [Parameter] public string Type { get; set; }
+    IList<Beverages> Beverage = new List<Beverages>();
+
+    protected async override Task OnInitializedAsync()
+    {
+        Beverage = await _bevRepo.FindByType(Endpoints.BevTypeEndpoint, Type);
+    }
+}

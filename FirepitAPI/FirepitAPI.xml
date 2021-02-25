@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FirepitAPI</name>
+    </assembly>
+    <members>
+        <member name="M:FirepitAPI.Controller.BeveragesController.GetBeverages">
+            <summary>
+            Get all beverages
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.BeveragesController.GetBeveragesTypes">
+            <summary>
+            Get all beverage types
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.BeveragesController.GetBeveragesType(System.String)">
+            <summary>
+            Get one beverage types
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.BeveragesController.GetBeverage(System.Int32)">
+            <summary>
+            Get beverage by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.BeveragesController.CreateBeverage(FirepitAPI.DTO.BeverageCreateDTO)">
+            <summary>
+            Create a beverage
+            </summary>
+            <param name="beverageDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.BeveragesController.UpdateBeverage(System.Int32,FirepitAPI.DTO.BeverageUpdateDTO)">
+            <summary>
+            Update beverage data
+            </summary>
+            <param name="id"></param>
+            <param name="beverageDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.BeveragesController.DeleteBeverage(System.Int32)">
+            <summary>
+            Delete beverage profile
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.ChatController.GetChats(System.String)">
+            <summary>
+            Get chats between users
+            </summary>
+            <param name="ToUserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.MeetingController.GetMeetings">
+            <summary>
+            Find all meetings
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.MeetingController.GetMeeting(System.Int32)">
+            <summary>
+            Find meeting by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.MeetingController.CreateMeeting(FirepitAPI.DTO.MeetingCreateDTO)">
+            <summary>
+            Create a new meeting
+            </summary>
+            <param name="meetingDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.MeetingController.UpdateMeeting(System.Int32,FirepitAPI.DTO.MeetingUpdateDTO)">
+            <summary>
+            Update meeting data
+            </summary>
+            <param name="id"></param>
+            <param name="meetingDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.MeetingController.DeleteMeeting(System.Int32)">
+            <summary>
+            Delete meeting profile
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.MeetingController.UpdateUserMeeting(System.Int32,FirepitAPI.DTO.UserMeetingUpdateDTO)">
+            <summary>
+            Updates UserMeetingTable
+            </summary>
+            <param name="MeetingId"></param>
+            <param name="userMeetingDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.PersonController.GetPeople">
+            <summary>
+            Get all people
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.PersonController.GetPerson(System.String)">
+            <summary>
+            Gets one person via Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.PersonController.UpdatePerson(System.String,FirepitAPI.DTO.PersonUpdateDTO)">
+            <summary>
+            Update person data
+            </summary>
+            <param name="id"></param>
+            <param name="personDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.PersonController.DeletePerson(System.String)">
+            <summary>
+            Delete person profile
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.QuoteController.GetQuotes">
+            <summary>
+            Returns all quotes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.QuoteController.GetQuote(System.Int32)">
+            <summary>
+            Get single quote by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.QuoteController.CreateQuote(FirepitAPI.DTO.QuoteCreateDTO)">
+            <summary>
+            Create a new quote
+            </summary>
+            <param name="quoteDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.QuoteController.UpdateQuote(System.Int32,FirepitAPI.DTO.QuoteUpdateDTO)">
+            <summary>
+            Update quote
+            </summary>
+            <param name="id"></param>
+            <param name="quoteDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.QuoteController.DeleteQuote(System.Int32)">
+            <summary>
+            Delete quote profile
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.UserController.Register(FirepitAPI.DTO.RegisterDTO)">
+            <summary>
+            User registration endpoint
+            </summary>
+            <param name="userDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FirepitAPI.Controller.UserController.Login(FirepitAPI.DTO.LoginDTO)">
+            <summary>
+            User login endpoint
+            </summary>
+            <param name="userDTO"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

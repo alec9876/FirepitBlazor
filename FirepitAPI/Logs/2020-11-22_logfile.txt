@@ -1,0 +1,7 @@
+2020-11-22 08:17:39.7867 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-22 08:17:39.7867 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-22 08:17:46.0719 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-22 08:17:46.0719 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-22 08:17:46.1337 INFO User - Login: Generating Token
+2020-11-22 08:17:46.1337 INFO User - Login: Generating Token
+2020-11-22 14:43:03.4727 ERROR Beverages - GetBeveragesTypes: Unable to cast object of type 'System.Collections.Generic.List`1[System.String]' to type 'System.Collections.Generic.IList`1[FirepitAPI.Models.Beverages]'. - 

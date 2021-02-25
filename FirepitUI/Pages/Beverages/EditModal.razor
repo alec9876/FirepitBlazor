@@ -1,0 +1,79 @@
+﻿@inject IBeveragesRepository _bevRepo
+@inject IMeetingRepository _meetRepo
+@inject IToastService _toast
+@inject NavigationManager _navMan
+
+@if (Beverage != null)
+{
+    <EditForm Model="Beverage" OnValidSubmit="HandleUpdate">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="form-group">
+            <label for="beverageName">Beverage Name</label>
+            <InputText @bind-Value="Beverage.Name" class="form-control" id="beverageName" />
+        </div>
+        <div class="form-group">
+            <label for="beverageType">Beverage Type</label>
+            <InputSelect @bind-Value="Beverage.Type" class="form-control">
+                @foreach (var type in Enum.GetValues(typeof(BeverageTypes)))
+                {
+                    <option value="@type">@type</option>
+                }
+            </InputSelect>
+        </div>
+        <div class="form-group">
+            <label for="beverageAmount">Beverage Amount</label>
+            <InputText @bind-Value="Beverage.Amount" class="form-control" id="beverageAmount" />
+        </div>
+        <div class="form-group">
+            <label for="beverageMeetingDate">For Meeting Date</label>
+            <InputSelect @bind-Value="Beverage.MeetingId" class="form-control">
+                @foreach (var meet in Meeting)
+                {
+                    <option value="@meet.Id">@meet.Date.ToShortDateString()</option>
+                }
+            </InputSelect>
+        </div>
+        <button class="btn btn-primary" type="submit">
+            <span class="oi oi-pencil"></span>
+            Submit Changes
+        </button>
+        <button @onclick="BlazoredModal.Cancel" class="btn btn-dark">Close</button>
+    </EditForm>
+}
+
+    @code {
+        [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+        [Parameter] public int Id { get; set; }
+
+        private Beverages Beverage { get; set; }
+        private IList<Meeting> Meeting;
+        private bool isSuccess = true;
+
+        protected async override Task OnInitializedAsync()
+        {
+            Beverage = await _bevRepo.Get(Endpoints.BeverageEndpoint, Id);
+            Meeting = await _meetRepo.Get(Endpoints.MeetingEndpoint);
+        }
+
+        private async Task HandleUpdate()
+        {
+            isSuccess = await _bevRepo.Update(Endpoints.BeverageEndpoint, Beverage, Beverage.Id);
+            if (isSuccess)
+            {
+                _toast.ShowSuccess("Beverage Updated Successfully", "");
+                BackToBeverageList();
+            }
+            else
+            {
+                _toast.ShowError("Beverage Update Failed", "");
+                BackToBeverageList();
+            }
+        }
+
+        private void BackToBeverageList()
+        {
+            _navMan.NavigateTo("/beverages/list", true);
+        }
+
+    }

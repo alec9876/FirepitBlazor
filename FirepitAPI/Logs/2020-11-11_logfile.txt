@@ -1,0 +1,43 @@
+2020-11-11 08:49:26.9994 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-11 08:49:31.0982 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-11 08:49:31.1493 INFO User - Login: Generating Token
+2020-11-11 08:55:57.5818 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-11 08:55:57.5818 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-11-11 08:56:01.9536 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-11 08:56:01.9536 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-11-11 08:56:02.0101 INFO User - Login: Generating Token
+2020-11-11 08:56:02.0375 INFO User - Login: Generating Token
+2020-11-11 10:50:45.6404 ERROR Beverages - GetBeverages: Unable to cast object of type 'System.String' to type 'System.Int32'. - 
+2020-11-11 10:51:34.0784 ERROR Beverages - GetBeverages: Unable to cast object of type 'System.String' to type 'System.Int32'. - 
+2020-11-11 10:52:29.4335 ERROR Beverages - GetBeverages: Unable to cast object of type 'System.String' to type 'System.Int32'. - 
+2020-11-11 10:52:39.0465 ERROR Beverages - GetBeverage: Unable to cast object of type 'System.String' to type 'System.Int32'. - 
+2020-11-11 10:52:59.5962 ERROR Beverages - GetBeverage: Unable to cast object of type 'System.String' to type 'System.Int32'. - 
+2020-11-11 10:55:49.7349 ERROR Beverages - GetBeverage: Unable to cast object of type 'System.String' to type 'System.Int32'. - 
+2020-11-11 11:04:55.7346 ERROR Beverages - GetBeverage: Unable to cast object of type 'System.String' to type 'System.Int32'. - 
+2020-11-11 11:09:10.4543 ERROR Beverages - GetBeverage: Unable to cast object of type 'System.String' to type 'System.Int32'. - 
+2020-11-11 11:10:51.5247 ERROR Beverages - GetBeverage: Unable to cast object of type 'System.String' to type 'System.Int32'. - 
+2020-11-11 11:21:40.6717 ERROR Beverages - CreateBeverage: Creation failed
+2020-11-11 12:18:35.5165 ERROR Beverages - GetBeverage: Lambda expression used inside Include is not valid. - 
+2020-11-11 12:23:04.3902 ERROR Beverages - GetBeverage: Lambda expression used inside Include is not valid. - 
+2020-11-11 14:19:14.1746 ERROR Person - GetPerson: Cannot create a DbSet for 'Person' because this type is not included in the model for the context. - 
+2020-11-11 14:22:40.6552 ERROR Person - GetPerson: Unable to cast object of type 'System.String' to type 'System.Int32'. - 
+2020-11-11 14:29:36.7820 ERROR Beverages - CreateBeverage: Creation failed
+2020-11-11 14:38:58.3911 ERROR Beverages - CreateBeverage: Creation failed
+2020-11-11 20:45:03.5049 ERROR Beverages - CreateBeverage: An error occurred while updating the entries. See the inner exception for details. - Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'BeverageTypeId'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__164_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__274_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+ClientConnectionId:672ed63a-5c98-4ac3-912c-fa856700fe44
+Error Number:207,State:1,Class:16
+2020-11-11 20:47:44.8771 ERROR Beverages - CreateBeverage: Creation failed
+2020-11-11 21:13:52.7800 ERROR Beverages - CreateBeverage: The entity type 'IdentityUserLogin<string>' requires a primary key to be defined. If you intended to use a keyless entity type call 'HasNoKey()'. - 
+2020-11-11 21:50:20.8115 ERROR Beverages - CreateBeverage: Creation failed

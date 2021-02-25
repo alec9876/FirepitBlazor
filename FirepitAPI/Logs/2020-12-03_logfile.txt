@@ -1,0 +1,9 @@
+2020-12-03 18:21:50.6388 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-12-03 18:21:52.1463 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-12-03 18:21:52.1692 INFO User - Login: Generating Token
+2020-12-03 18:23:30.7178 INFO User - Login: Login Attempt from user` alecschram@hotmail.com 
+2020-12-03 18:23:30.7533 INFO User - Login: alecschram@hotmail.com Successfully Authenticated
+2020-12-03 18:23:30.7533 INFO User - Login: Generating Token
+2020-12-03 20:54:17.3946 INFO Meeting - FindPersonGoing: Attempt to get user going.
+2020-12-03 20:55:40.1741 INFO Meeting - FindPersonGoing: Attempt to get user going.
+2020-12-03 21:18:17.4866 INFO Meeting - FindPersonGoing: Attempt to get user going.

@@ -1,0 +1,40 @@
+﻿@inject IBeveragesRepository _bevRepo
+@inject NavigationManager   _navMan
+@inject IToastService _toastService
+
+<h3>Are you sure you want to delete this beverage: @Beverage.Name?</h3>
+
+<button @onclick="DeleteBeverage" class="btn btn-danger">
+    <span class="oi oi-delete"></span>
+    Delete Book
+</button>
+<button @onclick="BlazoredModal.Cancel" class="btn btn-dark">Close</button>
+@code {
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+    [Parameter] public int BeverageId { get; set; }
+    Beverages Beverage = new Beverages();
+
+    private bool isSuccess = true;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Beverage = await _bevRepo.Get(Endpoints.BeverageEndpoint, BeverageId);
+    }
+
+    private async Task DeleteBeverage()
+    {
+        isSuccess = await _bevRepo.Delete(Endpoints.BeverageEndpoint, Beverage.Id);
+        if (isSuccess)
+        {
+            _toastService.ShowSuccess("Beverage Deleted", "");
+            BackToList();
+        }
+    }
+
+    private void BackToList()
+    {
+        _navMan.NavigateTo("/beverages/", true);
+    }
+
+
+}

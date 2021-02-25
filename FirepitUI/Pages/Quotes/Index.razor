@@ -1,0 +1,128 @@
+﻿@page "/quotes/"
+
+@inject IQuoteRepository _repo
+@inject IToastService _toast
+
+<h3>Quotes</h3>
+<hr />
+<br />
+@if (Quotes == null)
+{
+    <LoadingMessage Message="Loading" />
+}
+else
+{
+    <button @onclick="@(() => ModalService.Show<CreateModal>("Create Quote"))" class="btn btn-success">
+        <span class="oi oi-plus"></span>
+        Add Quote
+    </button>
+    <br />
+    <br />
+    <br />
+    @if (Quotes.Count < 1)
+    {
+        <LoadingMessage Message="Surely someone has said something at sometime.  Add a quote!" />
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-dark table-striped">
+                <thead style="background-color:black;">
+                    <tr>
+                        <th @onclick="@(async () => await SortQuotes("Name"))">Who Said It</th>
+                        <th @onclick="@(async () => await SortQuotes("Quote"))">The Quote</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Quotes)
+                    {
+                        <tr>
+                            <td>@item.WhoSaidItKey.FullName</td>
+                            <td>@item.Quote</td>
+                            @if (Id == item.PersonId)
+                            {
+                                <td>
+                                    <button @onclick="@(() => EditQuote(item.Id))" class="btn btn-warning">
+                                        <span class="oi oi-pencil"></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button @onclick="@(() => DeleteQuote(item.Id))" class="btn btn-danger">
+                                        <span class="oi oi-delete"></span>
+                                    </button>
+                                </td>
+                            }
+                            else
+                            {
+                                <td></td>
+                                <td></td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+}
+
+@code {
+    [CascadingParameter] public IModalService ModalService { get; set; }
+    [CascadingParameter] string Id { get; set; }
+    IList<Quotes> Quotes { get; set; }
+    private int ids = 0;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Quotes = await _repo.Get(Endpoints.QuoteEndpoint);
+    }
+
+    private void EditQuote(int id)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(EditModal.QuoteId), id);
+
+        ModalService.Show<EditModal>("Edit Quote", parameters);
+    }
+
+    private void DeleteQuote(int id)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(DeleteModal.QuoteId), id);
+
+        ModalService.Show<DeleteModal>("DELETE", parameters);
+    }
+
+    protected async Task SortQuotes(string sortOrder)
+    {
+        Quotes = await _repo.Get(Endpoints.QuoteEndpoint);
+
+        if (ids == 0)
+        {
+            ids = 1;
+            switch (sortOrder)
+            {
+                case "Name":
+                    Quotes = Quotes.OrderByDescending(x => x.WhoSaidItKey.FirstName).ToArray();
+                    break;
+                case "Quote":
+                    Quotes = Quotes.OrderByDescending(x => x.Quote).ToArray();
+                    break;
+            }
+        }
+        else
+        {
+            ids = 0;
+            switch (sortOrder)
+            {
+                case "Name":
+                    Quotes = Quotes.OrderBy(x => x.WhoSaidItKey.FirstName).ToArray();
+                    break;
+                case "Quote":
+                    Quotes = Quotes.OrderBy(x => x.Quote).ToArray();
+                    break;
+            }
+        }
+    }
+}

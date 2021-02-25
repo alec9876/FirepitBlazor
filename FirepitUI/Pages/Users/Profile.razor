@@ -1,0 +1,74 @@
+﻿@page "/profile/{Id}"
+
+@inject IPersonRepository _personRepo
+@inject NavigationManager _navMan
+@inject IToastService _toast
+
+<h3 class="card-title">@Model.FirstName @Model.LastName</h3>
+<hr />
+<br />
+@if (!isSuccess)
+{
+    <ErrorMessage Message="Something Went Wrong With the Operation" />
+}
+
+@if(Model == null)
+{
+    <ErrorMessage Message="Loading Profile" />
+}
+else
+{
+    <div class="col-md-4">
+        <table class="table table-responsive">
+            <tr>
+                <td>First Name</td>
+                <td>@Model.FirstName</td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td>@Model.LastName</td>
+            </tr>
+            <tr>
+                <td>Goes By:</td>
+                <td>@Model.GoesBy</td>
+            </tr>
+            <tr>
+                <td>Bio:</td>
+                <td>@Model.Bio</td>
+            </tr>
+        </table>
+    </div>
+
+    <button @onclick="BackToList" class="btn btn-outline-primary">
+        <span class="oi oi-home"></span>
+        Back To Home
+    </button>
+    <button @onclick="EditProfile" class="btn btn-outline-warning">
+        <span class="oi oi-pencil"></span>
+        Edit Profile
+    </button>
+}
+
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    private Person Model = new Person();
+    private bool isSuccess = true;
+    protected override async Task OnInitializedAsync()
+    {
+        string id = Convert.ToString(Id);
+        Model = await _personRepo.Get(Endpoints.PersonEndpoint, id);
+    }
+
+    private void EditProfile()
+    {
+        _navMan.NavigateTo($"/users/edit/{Model.Id}");
+    }
+
+    private void BackToList()
+    {
+        _navMan.NavigateTo("/");
+    }
+}

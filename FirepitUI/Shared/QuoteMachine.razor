@@ -1,0 +1,49 @@
+﻿@using System.Timers
+@inject IQuoteRepository _repo
+
+<p class="QuoteStyling">
+@if (Model == null)
+{
+    <span>Loading Quotes...</span>
+}
+else
+{
+    <span>@GetRandomQuote()</span>
+}
+</p>
+
+@code {
+        Random random = new Random();
+        IList<Quotes> Model { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Model = await _repo.Get(Endpoints.QuoteEndpoint);
+    }
+
+    private string GetRandomQuote()
+    {
+        int total = Model.Count();
+        int offset = random.Next(0, total);
+
+        var result = Model.Skip(offset).FirstOrDefault();
+
+        return $"\"{result.Quote}\"  -  {result.WhoSaidItKey.GoesBy} ";
+    }
+
+    public System.Timers.Timer timer;
+    protected override void OnInitialized()
+    {
+        timer = new Timer(30000);
+        timer.Elapsed += this.OnTimedEvent;
+        timer.AutoReset = true;
+        timer.Enabled = true;
+        timer.Start();
+    }
+
+    public void OnTimedEvent(Object source, ElapsedEventArgs e)
+    {
+        GetRandomQuote();
+        StateHasChanged();
+    }
+}
